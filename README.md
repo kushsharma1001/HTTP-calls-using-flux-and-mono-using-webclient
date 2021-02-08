@@ -53,4 +53,28 @@ public String getAccessToken(String baseUrl, String clientId, String clientSecre
                 
                 }
 
-https://www.baeldung.com/spring-webflux
+https://www.baeldung.com/spring-webflux <br/>
+
+Another simple comparision on how restTemplate and webCLient works:
+
+@RestController
+@RequestMapping("/serv1")
+@CrossOrigin("*")
+public class Service1Controller {
+	@Autowired
+	RestTemplate restTemplate;
+
+	@GetMapping(value = "/restTemplate")
+	public ResponseEntity<?> getDataFromService2RestTemplate() {
+		System.out.println("Service1 Controller Called");
+		ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://localhost:8081/serv2", String.class);
+		return ResponseEntity.ok().body("Recieved Message: " + responseEntity.getBody());
+	}
+
+	@GetMapping(value = "/webclient")
+	public ResponseEntity<?> getDataFromService2WebClient() {
+		Mono<String> message = WebClient.create("http://localhost:8081").get().uri(uriBuilder -> uriBuilder.path("/serv2").build()).retrieve()
+				.bodyToMono(String.class);
+		return ResponseEntity.ok().body("Recieved Message: " + message.block());
+	}
+}
