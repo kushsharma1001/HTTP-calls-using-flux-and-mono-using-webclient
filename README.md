@@ -1,5 +1,6 @@
-# WebClient: HTTP-calls-using-flux-and-mono
-This section shows WebClient usage for making api calls using flux and mono
+# WebClient: HTTP-calls-using-flux-and-mono and Retry using Webclient
+This section shows WebClient usage for making api calls using flux and mono.
+Retry mechanism using webclient can be read about here: https://ajinkyakarode24.medium.com/spring-boot-retry-mechanism-using-webclient-http-client-40c4d23e0b7e <br/>
 
 
 public String getAccessToken(String baseUrl, String clientId, String clientSecret) {
